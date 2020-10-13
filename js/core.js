@@ -57,18 +57,18 @@
         console.log('已开局....');
       });
 
-      // IPC.startRTC({
-      //   user: {
-      //     id: im.getConnectionUserId()
-      //   }
-      // }, {
-      //   published: (user) => {
-      //     setVideo(currentVideoEl, user);
-      //   },
-      //   subscribed: (user) => {
-      //     setVideo(remoteVideoEl, user);
-      //   }
-      // });
+      IPC.startRTC({
+        user: {
+          id: im.getConnectionUserId()
+        }
+      }, {
+        published: (user) => {
+          setVideo(currentVideoEl, user);
+        },
+        subscribed: (user) => {
+          setVideo(remoteVideoEl, user);
+        }
+      });
     },
     received: (message) => {
       var { messageType, content } = message;

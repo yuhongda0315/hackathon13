@@ -58,9 +58,11 @@
 
       var point = width - tableWidth;
 
+     
       for (var i = 0; i < gridCount; i++) {
         canvas.moveTo(gridCount + i * dWidth, gridCount);
         canvas.lineTo(gridCount + i * dWidth, point);
+        canvas.strokeStyle = "#504e4e";
         canvas.stroke();
         canvas.moveTo(gridCount, gridCount + i * dWidth);
         canvas.lineTo(point, gridCount + i * dWidth);
