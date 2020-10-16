@@ -28,11 +28,16 @@
     })
     return obj;
   };
+  var isCurrent = () => {
+    var query = getQueryString();
+    return query.id == 0;
+  };
   Thirteen.utils = {
     getDom,
     isEqual,
     Cache,
-    getQueryString
+    getQueryString,
+    isCurrent
   };
 
 })({
