@@ -3,6 +3,7 @@
   var el = utils.getDom('.thirteen-chessboard');
   var warnEl = utils.getDom('.thirteen-warning');
   var restartEl = utils.getDom('.thirteen-restart');
+  var startLiveEl = utils.getDom('.thirteen-startlive');
   var currentVideoEl = utils.getDom('#current-user');
   var remoteVideoEl = utils.getDom('#remote-user');
   var introEl = utils.getDom('#intro');
@@ -29,21 +30,21 @@
   var interval = 0, isNext = true;
   var checkGame = (direction) => {
     var name = '对方';
-    if (!utils.isCurrent()){
+    if (!utils.isCurrent()) {
       introEl.innerHTML = '你为白棋，对手为黑棋';
       name = '自己'
     }
     if (isGameover) {
       clearInterval(interval)
       warnEl.innerHTML = getWinText(name);
-    }else{
-      if(interval){
+    } else {
+      if (interval) {
         clearInterval(interval)
       }
       var seconds = 15;
       interval = setInterval(() => {
         warnEl.innerHTML = `待${direction}下棋，倒计时 ${seconds--}s`;
-        if(seconds < 0){
+        if (seconds < 0) {
           clearInterval(interval);
           isGameover = true;
           warnEl.innerHTML = getWinText(name);
@@ -59,7 +60,7 @@
   var setVideo = (node, user) => {
     node.srcObject = user.stream.mediaStream;
   };
-  
+
   IPC.startIM({
     appKey, token: users[QueryString.id || 0]
   }, {
@@ -72,18 +73,22 @@
         console.log('已开局....');
       });
 
-      // IPC.startRTC({
-      //   user: {
-      //     id: im.getConnectionUserId()
-      //   }
-      // }, {
-      //   published: (user) => {
-      //     setVideo(currentVideoEl, user);
-      //   },
-      //   subscribed: (user) => {
-      //     setVideo(remoteVideoEl, user);
-      //   }
-      // });
+      startLiveEl.onclick = function (event) {
+        IPC.startRTC({
+          roomId: roomId,
+          user: {
+            id: im.getConnectionUserId()
+          }
+        }, {
+          published: (user) => {
+            // setVideo(currentVideoEl, user);
+          },
+          subscribed: (user) => {
+            // setVideo(remoteVideoEl, user);
+          }
+        });
+      }
+
     },
     received: (message) => {
       var { messageType, content } = message;
@@ -124,6 +129,7 @@
       restart();
     });
   }
+
   window.chess = chess;
 })({
   Thirteen

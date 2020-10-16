@@ -24,14 +24,14 @@
     });
   };
   var startRTC = (config, callbacks) => {
-    var { user } = config;
+    var { user, roomId } = config;
     var rongRTC = new RongRTC({
       RongIMLib: RongIMLib
     });
     var { Room, Stream, StreamType } = rongRTC;
 
     var $room = new Room({
-      id: 'line13',
+      id: roomId,
       joined: function (user) {
       },
       left: function (user) {
@@ -47,7 +47,7 @@
     });
 
     $room.join(user).then(() => {
-      $stream.get().then(function ({ mediaStream }) {
+      navigator.mediaDevices.getDisplayMedia().then((mediaStream) => {
         var _user = {
           id: user.id,
           stream: {
@@ -62,8 +62,6 @@
         }, error => {
           console.log(error);
         });
-      }, error => {
-        console.error(error);
       });
     }, error => {
       console.log(error);
