@@ -24,6 +24,10 @@
     return QueryString.roomid;
   }
 
+  if(utils.isCurrent()){
+    startLiveEl.style.display = 'block';
+  }
+
   var getWinText = (name) => {
     return `${name}赢了~~~`;
   };
