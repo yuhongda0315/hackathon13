@@ -10,7 +10,8 @@ var Thirteen = {};
 Thirteen.settings = {
   appKey: 'z3v5yqkbv8v30',
   users: [
-    'jsrHWhXFtbO4DbAVLDZLtpTEYEJQqMDVideXWWShdTCRCo9NHqXKHju+CHb2pnHV@',
+    // 7257
+    'lTVjzyrj1wq0nKtFhYSavZTEYEJQqMDVideXWWShdTA291vRlp7HnOXHCjDP93K3@',
     // 185
     '2v7ZjAHIKFIewPN0pIO/DJTEYEJQqMDVideXWWShdTDNjRd/meEAY5YTQ7UdK4jK@'
   ]
